@@ -4,6 +4,18 @@ from datetime import datetime
 # Referencia a la colección de documentos
 documents_collection = db.get_collection("documents")
 
+def serialize_document(doc):
+    """
+    Convierte un documento de MongoDB en un diccionario serializable.
+    """
+    return {
+        "id": str(doc.get("_id", "")),
+        "file_name": doc.get("file_name", ""),
+        "content": doc.get("content", ""),
+        "uploaded_by": doc.get("uploaded_by", ""),
+        "uploaded_at": doc.get("uploaded_at", "").isoformat() if doc.get("uploaded_at") else ""
+    }
+
 def save_document(file_name, content, uploaded_by=None):
     """
     Guarda un documento PDF procesado en la base de datos.
@@ -27,8 +39,12 @@ def get_all_documents():
     """
     Recupera todos los documentos almacenados.
     """
-    documents = documents_collection.find()
-    return list(documents)
+    try:
+        documents = documents_collection.find()
+        return [serialize_document(doc) for doc in documents]
+    except Exception as e:
+        print(f"Error al recuperar documentos: {str(e)}")
+        raise e
 
 def delete_document_by_name(file_name):
     """

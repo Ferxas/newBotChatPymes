@@ -21,5 +21,5 @@ def chat_with_model(user_message):
         bot_response = response.choices[0].message.content if response.choices else "No se recibió respuesta del modelo."
         return bot_response
     
-    except openai.error.OpenAIError as e:
+    except openai.OpenAIError as e:
         raise Exception(f"Error al interactuar con OpenAI: {e}")
