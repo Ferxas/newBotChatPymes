@@ -34,17 +34,23 @@ function LoginPage() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-4 text-center text-blue-600">Iniciar Sesión</h2>
-        {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-b from-blue-50 to-gray-100">
+      <div className="bg-white p-10 rounded-lg shadow-lg w-full max-w-md">
+        <h2 className="text-3xl font-extrabold mb-6 text-center text-blue-700 drop-shadow-sm">
+          Iniciar Sesión
+        </h2>
+        {error && (
+          <p className="text-red-500 text-sm mb-6 bg-red-50 p-2 rounded border border-red-300">
+            {error}
+          </p>
+        )}
 
         <input
           type="email"
           placeholder="Correo electrónico"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full p-2 mb-4 border rounded-md"
+          className="w-full p-3 mb-4 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
         />
 
         <input
@@ -52,22 +58,24 @@ function LoginPage() {
           placeholder="Contraseña"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full p-2 mb-4 border rounded-md"
+          className="w-full p-3 mb-6 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
         />
 
         <button
           onClick={handleLogin}
           disabled={loading}
-          className={`w-full p-2 rounded-md text-white ${
-            loading ? "bg-gray-400 cursor-not-allowed" : "bg-blue-500 hover:bg-blue-600"
+          className={`w-full py-3 rounded-md text-white font-semibold transition-all duration-300 ${
+            loading
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-blue-600 hover:bg-blue-700"
           }`}
         >
           {loading ? "Iniciando sesión..." : "Iniciar Sesión"}
         </button>
 
-        <p className="text-sm text-center mt-4">
+        <p className="text-sm text-center mt-6">
           ¿No tienes una cuenta?{" "}
-          <a href="#" className="text-blue-500 hover:underline">
+          <a href="#" className="text-blue-600 hover:underline font-medium">
             Regístrate aquí
           </a>
         </p>

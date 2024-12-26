@@ -12,8 +12,8 @@ def chat_with_model(user_message):
                 {"role": "system", "content": "Eres un asistente útil."},
                 {"role": "user", "content": user_message}
             ],
-            max_tokens=50,
-            temperature=0.7,
+            max_tokens=9000,
+            temperature=0.6,
             top_p=1.0
         )
         
