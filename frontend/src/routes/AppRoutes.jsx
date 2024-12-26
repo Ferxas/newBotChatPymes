@@ -4,6 +4,7 @@ import LoginPage from "../pages/LoginPage";
 import ChatPage from "../pages/ChatPage";
 import DocumentsPage from "../pages/DocumentsPage";
 import NotFoundPage from "../pages/NotFoundPage";
+import FineTunePage from "../pages/FineTunePage";
 
 function AppRoutes() {
   return (
@@ -12,6 +13,7 @@ function AppRoutes() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/chat" element={<ChatPage />} />
       <Route path="/documents" element={<DocumentsPage />} />
+      <Route path="/finetune" element={<FineTunePage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );

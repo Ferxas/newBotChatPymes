@@ -51,7 +51,8 @@ def list_documents():
         documents = get_all_documents()
         return jsonify({"documents": documents}), 200
     except Exception as e:
-        return jsonify({"error": f"Error al listar documentos: {str(e)}"}), 500
+        print(f"Error en /documents/all: {str(e)}")
+        return jsonify({"error": "Error interno al listar documentos"}), 500
 
 
 # 📌 Ruta para obtener un documento por nombre
@@ -79,9 +80,8 @@ def delete_document_route(filename):
     """
     try:
         result = delete_document_by_name(filename)
-        if result.deleted_count > 0:
+        if result > 0:
             return jsonify({"message": f"Documento '{filename}' eliminado exitosamente"}), 200
         return jsonify({"error": f"No se encontró el documento: {filename}"}), 404
     except Exception as e:
         return jsonify({"error": f"Error al eliminar el documento: {str(e)}"}), 500
-    

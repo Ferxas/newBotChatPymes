@@ -1,15 +1,23 @@
 import { useEffect, useState } from "react";
 import API from "../services/api";
+import Loader from "../components/Loader";
 
 function DocumentsPage() {
   const [documents, setDocuments] = useState([]);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const fetchDocuments = async () => {
+    setLoading(true);
+    setError("");
     try {
       const response = await API.get("/documents/all");
-      setDocuments(response.data.documents);
+      setDocuments(response.data.documents || []);
     } catch (error) {
       console.error("Error al obtener documentos:", error);
+      setError("Error al obtener documentos. Intenta de nuevo más tarde.");
+    } finally {
+      setLoading(false);
     }
   };
 
